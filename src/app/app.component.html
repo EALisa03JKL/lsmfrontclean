@@ -1,19 +1,43 @@
-<nav class="navbar">
-  <a class="btn btn-ghost text-xl" routerLink="/home" routerLinkActive="active"
-    >Home</a
-  >
-  <a
-    class="btn btn-ghost text-xl"
-    routerLink="/dictionary"
-    routerLinkActive="active"
-    >Dictionary</a
-  >
-  <a
-    class="btn btn-ghost text-xl"
-    routerLink="/contact"
-    routerLinkActive="active"
-    >Contact</a
-  >
-</nav>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<div class="flex flex-col min-h-screen">
+  <!-- Navbar fijado al inicio -->
+  <nav class="navbar fixed top-0 w-full bg-brown shadow-md z-10 flex justify-center py-2">
+    <div class="flex space-x-4">
+      <a
+        class="btn btn-ghost text-xl"
+        routerLink="/login"
+        routerLinkActive="active"
+        >Inicio de Sesion</a
+      >
+      <a
+        class="btn btn-ghost text-xl"
+        routerLink="/dictionary"
+        routerLinkActive="active"
+        >Diccionario</a
+      >
+      <a
+        class="btn btn-ghost text-xl"
+        routerLink="/mainmenu"
+        routerLinkActive="active"
+        >Menu Principal</a
+      >
+      <a
+        class="btn btn-ghost text-xl"
+        routerLink="/gamesmenu"
+        routerLinkActive="active"
+        >Menu de Juegos</a
+      >
+      <a class="btn btn-ghost text-xl"
+      routerLink="/profile"
+      routerLinkActive="active">
+      Perfil </a
+       >
+    </div>
 
-<router-outlet></router-outlet>
+  </nav>
+
+  <!-- Espacio para el contenido principal -->
+  <div class="mt-16 flex-auto">
+    <router-outlet></router-outlet>
+  </div>
+</div>

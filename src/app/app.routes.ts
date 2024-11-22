@@ -8,13 +8,26 @@ import { RankingsComponent } from './rankings/rankings.component';
 export const routes: Routes = [
   {
     path: 'dictionary',
-    loadComponent: () => import('./dictionary/ui/ui.component').then((m) => m.UiComponent),
+    loadComponent: () => import('./dictionary/ui/ui.component').then((m) => m.UiComponent)
   },
   {
-    path: 'games',
-    component: GamesmenuComponent,
+    path: 'mainmenu',
+    loadComponent: () => import('./mainmenu/ui/ui.component').then((m) => m.UiComponent) 
   },
-  { path: 'menu', component: MainmenuComponent },
+  {
+    path: 'gamesmenu',
+    loadComponent: () => import('./gamesmenu/ui/ui.component').then((m) => m.UiComponent)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./login/ui/ui.component').then((m) => m.UiComponent)
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./profile/ui/ui.component').then((m) => m.UiComponent) 
+  },
+
+  { path: 'mainmenu', component: MainmenuComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'ranking', component: RankingsComponent },
