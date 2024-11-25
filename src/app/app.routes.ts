@@ -40,11 +40,7 @@ export const routes: Routes = [
   },
   {
     path: 'guesssign',
-    loadComponent: () => import('./guesssign/offline/ui/ui.component').then((m) =>m.UiComponent)
+    loadComponent: () => import('./guesssign/online/ui/uigame/uigame.component').then((m) =>m.UigameComponent)
   },
-  {
-    path: 'signsmemory',
-    loadComponent: () => import('./signsmemory/offline/ui/ui.component').then((m) => m.UiComponent)
-  },
-
+  
 ];
