@@ -32,7 +32,23 @@
       routerLinkActive="active">
       Perfil </a
        >
+      
+      <a class="btn btn-ghost text-xl"
+      routerLink="/ranking"
+      routerLinkActive="active">Rankings</a>
+      
+      <a class="btn btn-ghost text-xl"
+      routerLink="/createaccount"
+      routerLinkActive="active"
+      >Registro Usuario </a>
+
+      <a class="btn btn-ghost text-xl"
+      routerLink="/guesssecuence"
+      routerLinkActive="active"
+      >Recuerda la Secuencia </a>
     </div>
+
+
 
   </nav>
 
@@ -41,3 +57,10 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+
+<div *ngIf="!isLoginPage()" class="absolute top-4 left-4">
+  <button href="#" class="text-black text-3xl hover:text-black-300">
+    <i class="fas fa-arrow-left"></i>
+  </button>
+</div>
+

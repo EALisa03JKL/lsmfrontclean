@@ -26,10 +26,21 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/ui/ui.component').then((m) => m.UiComponent) 
   },
-
-  { path: 'mainmenu', component: MainmenuComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'ranking', component: RankingsComponent },
+  {
+    path: 'ranking',
+    loadComponent: () => import('./rankings/ui/ui.component').then((m) => m.UiComponent)
+  },
+  {
+    path: 'createaccount',
+    loadComponent: () => import('./createaccount/ui/ui.component').then((m) => m.UiComponent)
+  },
+  {
+    path: 'guesssecuence',
+    loadComponent: () => import('./guesssecuence/offline/ui/ui.component').then((m) =>m.UiComponent)
+  },
+  {
+    path: 'guesssecuence',
+    loadComponent: () => import('./guesssecuence/offline/ui/ui.component').then((m) =>m.UiComponent)
+  },
 
 ];
