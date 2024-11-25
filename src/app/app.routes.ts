@@ -39,8 +39,12 @@ export const routes: Routes = [
     loadComponent: () => import('./guesssecuence/offline/ui/ui.component').then((m) =>m.UiComponent)
   },
   {
-    path: 'guesssecuence',
-    loadComponent: () => import('./guesssecuence/offline/ui/ui.component').then((m) =>m.UiComponent)
+    path: 'guesssign',
+    loadComponent: () => import('./guesssign/offline/ui/ui.component').then((m) =>m.UiComponent)
+  },
+  {
+    path: 'signsmemory',
+    loadComponent: () => import('./signsmemory/offline/ui/ui.component').then((m) => m.UiComponent)
   },
 
 ];
