@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'guesssecuence',
-    loadComponent: () => import('./guesssecuence/offline/ui/ui.component').then((m) =>m.UiComponent)
+    loadComponent: () => import('./guesssecuence/online/ui/uigame/uigame.component').then((m) =>m.UigameComponent)
   },
   {
     path: 'guesssign',

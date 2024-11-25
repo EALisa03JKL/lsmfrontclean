@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UistartComponent } from './uistart.component';
+import { UistartofComponent } from './uistartof.component';
 
-describe('UistartComponent', () => {
-  let component: UistartComponent;
-  let fixture: ComponentFixture<UistartComponent>;
+describe('UistartofComponent', () => {
+  let component: UistartofComponent;
+  let fixture: ComponentFixture<UistartofComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UistartComponent]
+      imports: [UistartofComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(UistartComponent);
+    fixture = TestBed.createComponent(UistartofComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
