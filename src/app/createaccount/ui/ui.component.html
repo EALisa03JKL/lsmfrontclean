@@ -1,46 +1,47 @@
-<div class="flex flex-col items-center min-h-screen  p-6">
-    <!-- Header -->
-    <div class="absolute top-4 left-4">
-      <a href="#" class="text-black text-3xl hover:text-black-300">
-        <button class="fas fa-arrow-left"></button>
-      </a>
-    </div>
-  
-    <!-- Título -->
-    <h1 class="text-4xl font-bold mb-8">¡Regístrate aquí!</h1>
-  
-    <!-- Formulario -->
-    <form class="w-full max-w-md space-y-6">
-      <!-- Nombre -->
-      <div>
-        <label class="label font-semibold">Nombre</label>
-        <input type="text" placeholder="Tu nombre" class="input input-bordered w-full" />
-      </div>
-      
-      <!--Usuario-->
-      <div>
-        <label class="label font-semibold">Usuario</label>
-        <input type="user" placeholder="papitagamer" class="input input-bordered w-full" />
-      </div>
-      <!-- Correo -->
-      <div>
-        <label class="label font-semibold">Correo</label>
-        <input type="email" placeholder="ejemplo@correo.com" class="input input-bordered w-full" />
-      </div>
-  
-      <!-- Contraseña -->
-      <div>
-        <label class="label font-semibold">Contraseña</label>
-        <input type="password" placeholder="********" class="input input-bordered w-full" />
-      </div>
-  
-      <!-- Confirmar Contraseña -->
-      <div>
-        <label class="label font-semibold">Confirmar Contraseña</label>
-        <input type="password" placeholder="********" class="input input-bordered w-full" />
-      </div>
-  
-      <!-- Botón de Registro -->
-      <button class="btn btn-primary w-full mt-4">Registrarse</button>
-    </form>
+<div class="flex flex-col items-center min-h-screen p-6">
+  <!-- Header -->
+  <div class="absolute top-4 left-4">
+    <a href="#" class="text-black text-3xl hover:text-black-300">
+      <button class="fas fa-arrow-left"></button>
+    </a>
   </div>
+
+  <!-- Título -->
+  <h1 class="text-4xl font-bold mb-8">¡Regístrate aquí!</h1>
+
+  <!-- Formulario -->
+  <form class="w-full max-w-md space-y-6" [formGroup]="accountForm" (ngSubmit)="onRegister()">
+    <!-- Nombre -->
+    <div>
+      <label class="label font-semibold" for="userName">Nombre</label>
+      <input id="userName" formControlName="userName" type="text" placeholder="Tu nombre" name="username" class="input input-bordered w-full" required />
+    </div>
+    
+    <!-- Usuario -->
+    <div>
+      <label class="label font-semibold">Usuario</label>
+      <input type="text" placeholder="papitagamer" [(ngModel)]="username" name="user" class="input input-bordered w-full" required />
+    </div>
+
+    <!-- Correo -->
+    <div>
+      <label class="label font-semibold">Correo</label>
+      <input type="email" placeholder="ejemplo@correo.com" [(ngModel)]="email" name="email" class="input input-bordered w-full" required />
+    </div>
+
+    <!-- Contraseña -->
+    <div>
+      <label class="label font-semibold">Contraseña</label>
+      <input type="password" placeholder="********" [(ngModel)]="password" name="password" class="input input-bordered w-full" required />
+    </div>
+
+    <!-- Confirmar Contraseña -->
+    <div>
+      <label class="label font-semibold">Confirmar Contraseña</label>
+      <input type="password" placeholder="********" [(ngModel)]="confirmPassword" name="confirmPassword" class="input input-bordered w-full" required />
+    </div>
+
+    <!-- Botón de Registro -->
+    <button class="btn btn-primary w-full mt-4" type="submit">Registrarse</button>
+  </form>
+</div>

@@ -1,12 +1,19 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-ui',
-  standalone: true,
-  imports: [],
   templateUrl: './ui.component.html',
-  styleUrl: './ui.component.css'
+  styleUrls: ['./ui.component.css']
 })
 export class UiComponent {
+  accountForm = new FormGroup({
+    userName: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl('')
+  });
 
+  onRegister() {
+    console.log(this.accountForm.value)
+  }
 }

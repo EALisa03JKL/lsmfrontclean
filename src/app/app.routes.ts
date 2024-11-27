@@ -26,25 +26,5 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/ui/ui.component').then((m) => m.UiComponent) 
   },
-  {
-    path: 'ranking',
-    loadComponent: () => import('./rankings/ui/ui.component').then((m) => m.UiComponent)
-  },
-  {
-    path: 'createaccount',
-    loadComponent: () => import('./createaccount/ui/ui.component').then((m) => m.UiComponent)
-  },
-  {
-    path: 'guesssecuence',
-    loadComponent: () => import('./guesssecuence/online/ui/uigame/uigame.component').then((m) =>m.UigameComponent)
-  },
-  {
-    path: 'guesssign',
-    loadComponent: () => import('./guesssign/online/ui/uigame/uigame.component').then((m) =>m.UigameComponent)
-  },
-  {
-    path: 'signsmemory',
-    loadComponent: () => import('./signsmemory/offline/ui/uigame/uigame.component').then((m) => m.UigameComponent)
-  },
   
 ];
