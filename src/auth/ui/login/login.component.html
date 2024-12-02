@@ -12,12 +12,13 @@
 
     <!-- Formulario de login -->
     <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <form class="card-body">
+      <form class="card-body" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-control">
           <label class="label">
             <span class="label-text">Email</span>
           </label>
           <input
+            formControlName="email"
             type="email"
             placeholder="email"
             class="input input-bordered"
@@ -29,6 +30,7 @@
             <span class="label-text">Password</span>
           </label>
           <input
+            formControlName="password"
             type="password"
             placeholder="password"
             class="input input-bordered"
@@ -41,13 +43,12 @@
           </label>
         </div>
         <div class="form-control mt-6">
-          <button class="btn btn-primary">Iniciar sesión</button>
-        </div>
-
-        <div class="form-control mt-2">
-          <button class="btn btn-ghost underline">Iniciar como Invitado</button>
+          <button class="btn btn-primary" type="submit">Iniciar sesión</button>
         </div>
       </form>
+      <div class="form-control mt-2">
+        <button class="btn btn-ghost underline">Iniciar como Invitado</button>
+      </div>
     </div>
   </div>
 </div>

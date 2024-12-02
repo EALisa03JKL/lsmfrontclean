@@ -6,7 +6,7 @@ import {
 } from '../domain/user.model';
 export interface AuthApi {
   login: (email: string, password: string) => Observable<AuthUserLogin>;
-  logout: () => Promise<void>;
+  logout: () => void;
   register: (
     email: string,
     password: string,
