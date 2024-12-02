@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { AuthApi } from './auth-api.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, pipe, tap } from 'rxjs';
 import {
   AuthUser,
   AuthUserLogin,
@@ -21,19 +21,20 @@ export class AuthApiService implements AuthApi {
   };
 
   login(email: string, password: string): Observable<AuthUserLogin> {
-    return this._httpClient.post<AuthUserLogin>(
-      `${this.URL_AUTH}${this.AuthEndpoints.login}`,
-      {
+    return this._httpClient
+      .post<AuthUserLogin>(`${this.URL_AUTH}${this.AuthEndpoints.login}`, {
         email,
         password,
-      }
-    );
+      })
+      .pipe(
+        tap((result) => {
+          localStorage.setItem('user', JSON.stringify(result));
+        })
+      );
   }
 
-  logout(): Promise<void> {
-    return this._httpClient
-      .post<void>(`${this.URL_AUTH}${this.AuthEndpoints.logout}`, {})
-      .toPromise();
+  logout() {
+    localStorage.removeItem('token');
   }
 
   register(
@@ -60,4 +61,9 @@ export class AuthApiService implements AuthApi {
       }
     );
   }
+
+  isLoggedIn() {
+    return localStorage.getItem('token') !== null;
+  }
+
 }

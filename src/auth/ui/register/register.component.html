@@ -2,12 +2,17 @@
   <div class="hero-content flex-col lg:flex-row-reverse">
     <!-- Formulario de registro -->
     <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-      <form class="card-body">
+      <form
+        class="card-body"
+        [formGroup]="registerForm"
+        (ngSubmit)="onSumbit()"
+      >
         <div class="form-control">
           <label class="label">
             <span class="label-text">Nombre</span>
           </label>
           <input
+            formControlName="name"
             type="text"
             placeholder="Nombre completo"
             class="input input-bordered"
@@ -19,6 +24,7 @@
             <span class="label-text">Email</span>
           </label>
           <input
+            formControlName="email"
             type="email"
             placeholder="Correo electrónico"
             class="input input-bordered"
@@ -30,6 +36,7 @@
             <span class="label-text">Contraseña</span>
           </label>
           <input
+            formControlName="password"
             type="password"
             placeholder="Contraseña"
             class="input input-bordered"
@@ -41,6 +48,7 @@
             <span class="label-text">Confirmar Contraseña</span>
           </label>
           <input
+            formControlName="confirmPassword"
             type="password"
             placeholder="Confirma tu contraseña"
             class="input input-bordered"
@@ -48,7 +56,7 @@
           />
         </div>
         <div class="form-control mt-6">
-          <button class="btn btn-primary">Registrarse</button>
+          <button class="btn btn-primary" type="submit">Registrarse</button>
         </div>
       </form>
     </div>
@@ -57,8 +65,9 @@
     <div class="text-center lg:text-left">
       <h1 class="text-5xl font-bold">¡Regístrate ahora!</h1>
       <p class="py-6">
-        Crea una cuenta y comienza a explorar nuestro glosario de Lengua de Señas Mexicana,
-        participa en juegos interactivos y compite en los rankings globales. ¡Es fácil y rápido!
+        Crea una cuenta y comienza a explorar nuestro glosario de Lengua de
+        Señas Mexicana, participa en juegos interactivos y compite en los
+        rankings globales. ¡Es fácil y rápido!
       </p>
     </div>
   </div>

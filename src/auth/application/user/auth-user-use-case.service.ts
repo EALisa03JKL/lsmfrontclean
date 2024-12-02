@@ -17,7 +17,7 @@ export class AuthUserUseCaseService {
   }
 
   logout() {
-    console.log('logout');
+    return this._authApiService.logout();
   }
 
   register(
