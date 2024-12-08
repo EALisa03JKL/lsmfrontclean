@@ -2,14 +2,23 @@ import { inject, Injectable } from '@angular/core';
 import { AuthApi } from './auth-api.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
-import { Observable, pipe, tap } from 'rxjs';
+import { map, Observable, pipe, tap } from 'rxjs';
 import {
-  AuthUser,
-  AuthUserLogin,
-  AuthUserRegister,
-} from '../domain/user.model';
+  AuthData,
+  LoginResponse,
+  RegisterData,
+  RegisterResponse,
+  UpdateResponse,
+  UpdateUser,
+} from './models/auth-api.models';
+import {
+  LocalKeys,
+  LocalManagerService,
+} from '../../shared/LocalManager/storage.servicee';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class AuthApiService implements AuthApi {
   private _httpClient = inject(HttpClient);
   private readonly URL_AUTH = environment.URL_AUTH;
@@ -20,50 +29,68 @@ export class AuthApiService implements AuthApi {
     update: '/update',
   };
 
-  login(email: string, password: string): Observable<AuthUserLogin> {
+  public login(user: AuthData): Observable<LoginResponse> {
+    const { email, password } = user;
     return this._httpClient
-      .post<AuthUserLogin>(`${this.URL_AUTH}${this.AuthEndpoints.login}`, {
+      .post<LoginResponse>(`${this.URL_AUTH}${this.AuthEndpoints.login}`, {
         email,
         password,
       })
       .pipe(
-        tap((result) => {
-          localStorage.setItem('user', JSON.stringify(result));
+        map((result) => {
+          if (result.token) {
+            LocalManagerService.setElement(LocalKeys.token, result.token);
+          }
+          LocalManagerService.setElement(LocalKeys.email, result.email);
+          LocalManagerService.setElement(LocalKeys.name, result.name);
+          return result;
         })
       );
   }
 
   logout() {
-    localStorage.removeItem('token');
+    LocalManagerService.clearStorage();
+
   }
 
   register(
-    email: string,
-    password: string,
-    confirmPassword: string
-  ): Observable<AuthUserRegister> {
-    return this._httpClient.post<AuthUserRegister>(
-      `${this.URL_AUTH}${this.AuthEndpoints.register}`,
-      {
-        email,
-        password,
-        confirmPassword,
-      }
-    );
+    user: RegisterData
+    // confirmPassword: string
+  ): Observable<RegisterResponse> {
+    const { name, email, password } = user;
+
+    return this._httpClient
+      .post<RegisterResponse>(
+        `${this.URL_AUTH}${this.AuthEndpoints.register}`,
+        {
+          email,
+          password,
+          name,
+          // confirmPassword,
+        }
+      )
+      .pipe(
+        map((result) => {
+          if (result.token) {
+            LocalManagerService.setElement(LocalKeys.token, result.token);
+          }
+          LocalManagerService.setElement(LocalKeys.email, result.email);
+          LocalManagerService.setElement(LocalKeys.name, result.name);
+          return result;
+        })
+      );
   }
 
-  update(email: string, password: string): Observable<AuthUser> {
-    return this._httpClient.post<AuthUserRegister>(
+  update(id: UpdateUser): Observable<UpdateResponse> {
+    return this._httpClient.post<UpdateResponse>(
       `${this.URL_AUTH}${this.AuthEndpoints.update}`,
       {
-        email,
-        password,
+        id,
       }
     );
   }
 
   isLoggedIn() {
-    return localStorage.getItem('token') !== null;
+    return LocalManagerService.getElement(LocalKeys.token) !== null;
   }
-
 }

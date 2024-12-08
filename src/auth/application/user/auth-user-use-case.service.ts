@@ -1,19 +1,23 @@
-import { Inject, Injectable } from '@angular/core';
-import { HTTP_AUTH_SERVICE } from '../../infrastructure/providers/auth-api.provider';
+import { inject, Inject, Injectable } from '@angular/core';
 import { AuthApiService } from '../../infrastructure/auth-api.service';
 import { Observable } from 'rxjs';
-import { AuthUserLogin, AuthUserRegister } from '../../domain/user.model';
+import {
+  AuthData,
+  LoginResponse,
+  RegisterData,
+  RegisterResponse,
+  UpdateResponse,
+  UpdateUser,
+} from '../../infrastructure/models/auth-api.models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthUserUseCaseService {
-  constructor(
-    @Inject(HTTP_AUTH_SERVICE) private _authApiService: AuthApiService
-  ) {}
+  private _authApiService = inject(AuthApiService);
 
-  login(email: string, password: string): Observable<AuthUserLogin> {
-    return this._authApiService.login(email, password);
+  login(user: AuthData): Observable<LoginResponse> {
+    return this._authApiService.login(user);
   }
 
   logout() {
@@ -21,14 +25,17 @@ export class AuthUserUseCaseService {
   }
 
   register(
-    email: string,
-    password: string,
-    confirmPassword: string
-  ): Observable<AuthUserRegister> {
-    return this._authApiService.register(email, password, confirmPassword);
+    user: RegisterData
+    // confirmPassword: string
+  ): Observable<RegisterResponse> {
+    return this._authApiService.register(user);
   }
 
-  update() {
-    console.log('update');
+  update(id: UpdateUser): Observable<UpdateResponse> {
+    return this._authApiService.update(id);
+  }
+
+  isLoggedIn(): boolean {
+    return this._authApiService.isLoggedIn();
   }
 }

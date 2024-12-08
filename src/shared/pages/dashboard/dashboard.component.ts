@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  imports: [SidebarComponent],
 })
-export class DashboardComponent {
-
-  constructor() { }
-
-}
+export class DashboardComponent {}

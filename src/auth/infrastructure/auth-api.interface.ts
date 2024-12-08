@@ -1,17 +1,16 @@
 import { Observable } from 'rxjs';
 import {
-  AuthUserRegister,
-  AuthUserLogin,
-  AuthUser,
-} from '../domain/user.model';
+  RegisterData,
+  AuthData,
+  RegisterResponse,
+  LoginResponse,
+  UpdateResponse,
+  UpdateUser,
+} from './models/auth-api.models';
 export interface AuthApi {
-  login: (email: string, password: string) => Observable<AuthUserLogin>;
+  login: (user: AuthData) => Observable<LoginResponse>;
   logout: () => void;
-  register: (
-    email: string,
-    password: string,
-    confirmPassword: string
-  ) => Observable<AuthUserRegister>;
+  register: (user: RegisterData) => Observable<RegisterResponse>;
 
-  update: (name: string, email: string) => Observable<AuthUser>;
+  update: (id: UpdateUser) => Observable<UpdateResponse>;
 }

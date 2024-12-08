@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 
 export enum LocalKeys {
-  token = 'S3cret0',
+  token = 'token',
+  email = 'email',
+  name = 'name',
 }
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalService {
+export class LocalManagerService {
   static getElement(key: LocalKeys): string | null {
     return localStorage.getItem(key);
   }

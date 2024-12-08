@@ -1,13 +1,39 @@
-export interface AuthUser {
-  readonly name: string;
+/** Interface que contiene el token opcionalmente */
+export interface TokenContainer {
+  readonly token?: string;
+}
+
+/** Datos necesarios para el login */
+export interface AuthData {
   readonly email: string;
-}
-
-export interface AuthUserLogin extends AuthUser {
   readonly password: string;
 }
 
-export interface AuthUserRegister extends AuthUser {
-  readonly password: string;
-  readonly confirmPassword: string;
+/** Datos necesarios para el registro */
+export interface RegisterData extends AuthData {
+  readonly name: string;
+}
+
+/** Respuesta del login que contiene el token */
+export interface LoginResponse extends TokenContainer {
+  readonly email: string;
+  readonly name: string;
+  readonly id: string;
+}
+
+/** Respuesta del registro que contiene el token */
+export interface RegisterResponse extends TokenContainer {
+  readonly email: string;
+  readonly name: string;
+}
+
+export interface UpdateUser {
+  readonly id: string;
+}
+
+export interface UpdateResponse extends UpdateUser {
+  readonly email: string;
+  readonly name: string;
+  readonly isAcive: boolean;
+  readonly rol: string;
 }
