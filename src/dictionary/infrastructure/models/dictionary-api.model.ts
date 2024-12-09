@@ -2,7 +2,7 @@ export interface ApiDictionaryContent {
   id: string;
   name: string;
   description: string;
-  imageUrl: string;
+  imageURL: string;
   class: string;
 }
 
