@@ -4,13 +4,14 @@ import {
   AuthData,
   RegisterResponse,
   LoginResponse,
-  UpdateResponse,
-  UpdateUser,
+  UserResponse,
+  UserToken,
 } from './models/auth-api.models';
 export interface AuthApi {
   login: (user: AuthData) => Observable<LoginResponse>;
   logout: () => void;
   register: (user: RegisterData) => Observable<RegisterResponse>;
-
-  update: (id: UpdateUser) => Observable<UpdateResponse>;
+  update: (id: string) => Observable<UserResponse>;
+  isLoggedIn: () => boolean;
+  getUserData: (id: string) => Observable<UserResponse>;
 }

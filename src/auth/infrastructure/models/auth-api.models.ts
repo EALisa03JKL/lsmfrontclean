@@ -27,11 +27,11 @@ export interface RegisterResponse extends TokenContainer {
   readonly name: string;
 }
 
-export interface UpdateUser {
+export interface UserToken {
   readonly id: string;
 }
 
-export interface UpdateResponse extends UpdateUser {
+export interface UserResponse extends UserToken {
   readonly email: string;
   readonly name: string;
   readonly isAcive: boolean;

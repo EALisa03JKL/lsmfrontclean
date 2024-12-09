@@ -6,8 +6,8 @@ import {
   LoginResponse,
   RegisterData,
   RegisterResponse,
-  UpdateResponse,
-  UpdateUser,
+  UserResponse,
+  UserToken,
 } from '../../infrastructure/models/auth-api.models';
 
 @Injectable({
@@ -31,11 +31,15 @@ export class AuthUserUseCaseService {
     return this._authApiService.register(user);
   }
 
-  update(id: UpdateUser): Observable<UpdateResponse> {
+  update(id: string): Observable<UserResponse> {
     return this._authApiService.update(id);
   }
 
   isLoggedIn(): boolean {
     return this._authApiService.isLoggedIn();
+  }
+
+  getUserData(id: string): Observable<UserResponse> {
+    return this._authApiService.getUserData(id);
   }
 }

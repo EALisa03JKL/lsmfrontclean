@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { LogOut, LucideAngularModule } from 'lucide-angular';
+import { LogOut, LucideAngularModule, X } from 'lucide-angular';
 import { AuthUserUseCaseService } from '../../../../auth/application/user/auth-user-use-case.service';
 
 @Component({
@@ -13,6 +13,7 @@ export class LogOutButtonComponent {
   authService = inject(AuthUserUseCaseService);
 
   readonly LogOutIcon = LogOut;
+  readonly CancelIcon = X;
 
   logout() {
     this.authService.logout();

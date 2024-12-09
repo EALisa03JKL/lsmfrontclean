@@ -66,7 +66,7 @@ export class RegisterComponent {
   };
 
   async onSumbit() {
-    console.log(this.registerForm.getRawValue());
+    // console.log(this.registerForm.getRawValue());
     // console.log(this.registerForm.errors);
 
     if (this.registerForm.valid) {

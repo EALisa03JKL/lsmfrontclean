@@ -4,6 +4,7 @@ export enum LocalKeys {
   token = 'token',
   email = 'email',
   name = 'name',
+  id = 'id',
 }
 
 @Injectable({
