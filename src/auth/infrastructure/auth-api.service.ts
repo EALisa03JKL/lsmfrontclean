@@ -98,7 +98,7 @@ export class AuthApiService implements AuthApi {
   getUserData(token: string): Observable<UserResponse> {
     const id = this._decodeJwtService.decodeId(token);
     // console.log(id);
-    delay(5000);
+    // delay(5000);
     return this._httpClient.get<UserResponse>(`${this.URL_AUTH}/${id}`);
   }
 }

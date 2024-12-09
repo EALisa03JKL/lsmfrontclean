@@ -4,6 +4,8 @@ import { RegisterComponent } from '../auth/ui/register/register.component';
 import { HomePageComponent } from '../shared/pages/home-page/home-page.component';
 import { DashboardComponent } from '../shared/pages/dashboard/dashboard.component';
 import { AuthGuard } from '../auth/application/user/auth.guard';
+import { ProfileComponent } from '../profile/ui/profile-component/profile.component';
+import { DictionaryComponent } from '../dictionary/ui/dictionary/dictionary.component';
 
 export const routes: Routes = [
   {
@@ -22,5 +24,24 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'profile',
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'dictionary',
+        component: DictionaryComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'dictionary/:cat',
+        loadComponent: () =>
+          import('../dictionary/ui/category-page/category-page.component').then(
+            (m) => m.CategoryPageComponent
+          ),
+      },
+    ],
   },
 ];

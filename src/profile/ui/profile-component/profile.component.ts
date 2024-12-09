@@ -1,25 +1,26 @@
-import { AuthApiService } from './../../../../auth/infrastructure/auth-api.service';
-import { Component, Inject, inject, OnInit } from '@angular/core';
-import { LucideAngularModule, Settings } from 'lucide-angular';
-import { DecodeJwtService } from '../../../LocalManager/decode.jwt';
-import { UserResponse } from '../../../../auth/infrastructure/models/auth-api.models';
+import { Component, inject, input, Input, OnInit } from '@angular/core';
+import { LucideAngularModule, Home, User, Settings } from 'lucide-angular';
+import { DecodeJwtService } from '../../../shared/LocalManager/decode.jwt';
+import { AuthApiService } from '../../../auth/infrastructure/auth-api.service';
+import { UserResponse } from '../../../auth/infrastructure/models/auth-api.models';
 import {
   LocalKeys,
   LocalManagerService,
-} from '../../../LocalManager/storage.servicee';
+} from '../../../shared/LocalManager/storage.servicee';
 
 @Component({
-  selector: 'app-profile-info',
-  templateUrl: './profile-info.component.html',
-  styleUrls: ['./profile-info.component.css'],
-  imports: [LucideAngularModule],
+  selector: 'app-profile-component',
   standalone: true,
+  imports: [LucideAngularModule],
+  templateUrl: './profile.component.html',
 })
-export class ProfileInfoComponent implements OnInit {
+export class ProfileComponent implements OnInit {
+  readonly HomeIcon = Home;
+  readonly UserIcon = User;
+  readonly SettingsIcon = Settings;
+
   _decodeJwtService = inject(DecodeJwtService);
   _AuthApiService = inject(AuthApiService);
-
-  readonly SettingsIcon = Settings;
 
   isLoading = true;
 
