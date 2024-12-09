@@ -44,7 +44,7 @@ export class ProfileInfoComponent implements OnInit {
           // obtener primeras letras del nombre y convertirlas a mayúsculas
           const name = this.userData.name.split(' ');
           this.userAvatar = (
-            name[0].charAt(0) + name[1].charAt(0)
+            name[0].charAt(0) + name[0].charAt(1)
           ).toUpperCase();
           this.isLoading = false;
         });

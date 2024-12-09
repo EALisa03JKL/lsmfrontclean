@@ -5,6 +5,9 @@ import {
   Gamepad2,
   Puzzle,
   List,
+  WholeWord,
+  Swords,
+  Sword,
 } from 'lucide-angular';
 
 @Component({
@@ -19,4 +22,6 @@ export class MenuItemsComponent {
   readonly Gamepad2Icon = Gamepad2;
   readonly PuzzleIcon = Puzzle;
   readonly ListIcon = List;
+  readonly OnlineIcon = Swords;
+  readonly LocalIcon = Sword
 }
