@@ -1,0 +1,56 @@
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+  grid-template-rows: repeat(4, 150px);
+  gap: 10px;
+  justify-content: center;
+}
+
+.memory-card {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #ccc;
+  position: relative;
+  cursor: pointer;
+  border-radius: 10px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  transform: rotateY(0deg);
+}
+
+.memory-card.flipped {
+  transform: rotateY(180deg);
+}
+
+.memory-card.matched {
+  transition: none;
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-back {
+  background-image: url('/assets/carta_volteada.jpg'); /* Ruta de la imagen de la carta volteada */
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+}

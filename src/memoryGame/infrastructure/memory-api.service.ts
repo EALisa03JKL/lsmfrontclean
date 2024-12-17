@@ -1,18 +1,18 @@
 import { inject, Injectable } from '@angular/core';
+import { MemoryApiGame } from './models/memory-api.model';
 import { forkJoin, map, Observable } from 'rxjs';
-import { ApiDictionaryContent } from '../../dictionary/infrastructure/models/dictionary-api.model';
-import { GuessLocalGame } from './guess-api.interface';
-import { GuessApiGame } from './models/guess-api.model';
+import { MemoryLocalGame } from './memory-api.interface';
 import { HttpClient } from '@angular/common/http';
+import { ApiDictionaryContent } from '../../dictionary/infrastructure/models/dictionary-api.model';
 import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GuessApiService implements GuessLocalGame {
+export class MemoryApiService implements MemoryLocalGame {
   private _httpClient = inject(HttpClient);
   private URL_DICTIONARY = environment.URL_DICTIONARY;
-  private URL_GUESS_LOCAL = environment.URL_GUESS_LOCAL;
+  private URL_MEMORY_LOCAL = environment.URL_MEMORY_LOCAL;
 
   getAllContent(): Observable<ApiDictionaryContent[]> {
     // Devuelve todas las palabras del diccionario de todas las categorías
@@ -32,15 +32,18 @@ export class GuessApiService implements GuessLocalGame {
     return forkJoin(requests).pipe(map((responses) => responses.flat()));
   }
 
-  getUserPoints(id: string): Observable<GuessApiGame> {
-    return this._httpClient.get<GuessApiGame>(`${this.URL_GUESS_LOCAL}/${id}`);
+  getUserPoints(id: string): Observable<MemoryApiGame> {
+    return this._httpClient.get<MemoryApiGame>(
+      `${this.URL_MEMORY_LOCAL}/${id}`
+    );
   }
-
-  updateUserPoints(data: GuessApiGame): Observable<GuessApiGame> {
-    return this._httpClient.patch<GuessApiGame>(
-      `${this.URL_GUESS_LOCAL}/update`,
+  updateUserPoints(data: MemoryApiGame): Observable<MemoryApiGame> {
+    return this._httpClient.patch<MemoryApiGame>(
+      `${this.URL_MEMORY_LOCAL}/update`,
       data
     );
   }
-
+  compareWords(word: string, wordToCompare: string): boolean {
+    return word === wordToCompare;
+  }
 }

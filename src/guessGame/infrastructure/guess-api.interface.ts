@@ -9,5 +9,4 @@ export interface GuessLocalGame {
 
   updateUserPoints(data: GuessApiGame): Observable<GuessApiGame>;
 
-  compareWords(word: string, wordToCompare: string): boolean;
 }

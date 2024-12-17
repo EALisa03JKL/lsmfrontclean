@@ -82,6 +82,19 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'memory',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'local',
+            loadComponent: () =>
+              import(
+                '../memoryGame/ui/memory-local/memory-local.component'
+              ).then((m) => m.MemoryLocalComponent),
+          },
+        ],
+      },
     ],
   },
 ];
