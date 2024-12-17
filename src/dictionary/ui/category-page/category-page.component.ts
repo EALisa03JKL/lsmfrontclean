@@ -33,7 +33,7 @@ export class CategoryPageComponent implements OnInit {
     };
     this._dictionaryApiService.getContent(category).subscribe((data) => {
       this.category = data;
-      console.log(this.category);
+      // console.log(this.category);
     });
   }
 }

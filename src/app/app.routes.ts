@@ -42,6 +42,27 @@ export const routes: Routes = [
             (m) => m.CategoryPageComponent
           ),
       },
+      {
+        path: 'guess',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'local',
+            loadComponent: () =>
+              import('../guessGame/ui/local/local.component').then(
+                (m) => m.LocalComponent
+              ),
+          },
+          {
+            path: 'online',
+            loadComponent: () =>
+              import('../guessGame/ui/pvp/pvp.component').then(
+                (m) => m.PvpComponent
+              ),
+          }
+        ]
+
+      }
     ],
   },
 ];
