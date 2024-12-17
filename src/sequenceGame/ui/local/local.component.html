@@ -1,26 +1,13 @@
 <div class="text-center p-4">
   @if (isLoading()) {
+  <!-- Pantalla de carga -->
   <div class="flex flex-col items-center justify-center h-screen">
     <span class="loading loading-spinner loading-lg"></span>
     <p class="text-lg font-semibold mt-4">Cargando contenido...</p>
   </div>
-  } @else { @if (!isGameOver()) { @if (userHighPoints()) {
-  <div class="alert mb-4 flex flex-row items-center w-full justify-between">
-    <h3 class="text-xl font-bold">Mejor Partida</h3>
-    <p>Puntos: {{ userHighPoints()?.points }}</p>
-    <p>Secuencia Recordada: {{ userHighPoints()?.sequenceRemembered }}</p>
-  </div>
-  }
-
+  } @else { @if (!isGameOver()) {
   <div>
-    <img
-      [src]="currentSign()?.imageURL"
-      alt="Seña"
-      class="w-48 mx-auto my-4 animate-pulse"
-    />
-    <p class="mb-4 text-lg font-semibold">Selecciona la seña correcta:</p>
-    <p>{{ currentSign()?.name }}</p>
-
+    <!-- Información del Juego -->
     <div class="mb-4 grid grid-cols-3 gap-4 text-center">
       <div>
         Puntos: <span class="font-bold">{{ points() }}</span>
@@ -34,22 +21,49 @@
       </div>
     </div>
 
-    <div class="position-relative mx-auto" style="max-width: 300px">
+    <!-- Badges con palabras seleccionadas -->
+    <h3 class="text-lg font-semibold mb-2">Tu Secuencia Actual:</h3>
+    <div class="flex flex-wrap gap-2 justify-center mb-4">
+      @for (word of _userSequence(); track word) {
+      <div class="badge badge-accent gap-2 px-4 py-2">
+        {{ word }}
+      </div>
+      }
+    </div>
+    <!-- Tarjetas de la Secuencia Esperada -->
+    <h3 class="text-lg font-semibold mt-6 mb-2">Secuencia Completa:</h3>
+    <div class="grid grid-cols-4 gap-4 justify-center mb-6">
+      @for (card of _sequence(); track card.id) {
+      <div class="card bg-base-100 shadow-md border p-2">
+        <img
+          [src]="card.imageURL"
+          alt="{{ card.name }}"
+          class="w-16 h-16 mx-auto"
+        />
+        <p class="mt-2 text-sm font-semibold">{{ card.name }}</p>
+      </div>
+      }
+    </div>
+
+    <!-- Input de búsqueda -->
+    <div class="relative mx-auto" style="max-width: 300px">
       <input
         type="text"
         class="input input-bordered w-full"
         placeholder="Buscar..."
         [formControl]="searchControl"
       />
+
+      <!-- Lista de opciones filtradas -->
       @if (filteredItems().length > 0) {
       <div
-        class="dropdown-menu show position-absolute w-100 bg-white border border-gray-300 mt-1"
-        style="z-index: 1; max-height: 200px; overflow-y: auto"
+        class="dropdown-menu show absolute w-full bg-base-100 border border-base-300 mt-1 rounded-lg shadow-lg"
+        style="z-index: 10; max-height: 200px; overflow-y: auto"
       >
         @for (item of filteredItems(); track item.name) {
         <button
           type="button"
-          class="dropdown-item text-left flex items-center px-2 py-1 hover:bg-gray-100"
+          class="dropdown-item text-left px-3 py-2 hover:bg-base-200 w-full flex items-center"
           (click)="addUserInput(item.name)"
         >
           {{ item.name }}
@@ -60,6 +74,7 @@
     </div>
   </div>
   } @else {
+  <!-- Juego Terminado -->
   <div>
     <h2 class="text-3xl font-bold text-red-500 mb-4">¡Juego Terminado!</h2>
     <p>
