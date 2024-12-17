@@ -59,10 +59,29 @@ export const routes: Routes = [
               import('../guessGame/ui/pvp/pvp.component').then(
                 (m) => m.PvpComponent
               ),
-          }
-        ]
-
-      }
+          },
+        ],
+      },
+      {
+        path: 'sequence',
+        canActivate: [AuthGuard],
+        children: [
+          {
+            path: 'local',
+            loadComponent: () =>
+              import('../sequenceGame/ui/local/local.component').then(
+                (m) => m.LocalComponent
+              ),
+          },
+          {
+            path: 'online',
+            loadComponent: () =>
+              import('../sequenceGame/ui/pvp/pvp.component').then(
+                (m) => m.PvpComponent
+              ),
+          },
+        ],
+      },
     ],
   },
 ];

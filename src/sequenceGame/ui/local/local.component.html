@@ -1,0 +1,78 @@
+<div class="text-center p-4">
+  @if (isLoading()) {
+  <div class="flex flex-col items-center justify-center h-screen">
+    <span class="loading loading-spinner loading-lg"></span>
+    <p class="text-lg font-semibold mt-4">Cargando contenido...</p>
+  </div>
+  } @else { @if (!isGameOver()) { @if (userHighPoints()) {
+  <div class="alert mb-4 flex flex-row items-center w-full justify-between">
+    <h3 class="text-xl font-bold">Mejor Partida</h3>
+    <p>Puntos: {{ userHighPoints()?.points }}</p>
+    <p>Secuencia Recordada: {{ userHighPoints()?.sequenceRemembered }}</p>
+  </div>
+  }
+
+  <div>
+    <img
+      [src]="currentSign()?.imageURL"
+      alt="Seña"
+      class="w-48 mx-auto my-4 animate-pulse"
+    />
+    <p class="mb-4 text-lg font-semibold">Selecciona la seña correcta:</p>
+    <p>{{ currentSign()?.name }}</p>
+
+    <div class="mb-4 grid grid-cols-3 gap-4 text-center">
+      <div>
+        Puntos: <span class="font-bold">{{ points() }}</span>
+      </div>
+      <div>
+        Secuencia Recordada:
+        <span class="font-bold">{{ sequenceRemembered() }}</span>
+      </div>
+      <div>
+        Tiempo: <span class="font-bold">{{ elapsedTime() }}s</span>
+      </div>
+    </div>
+
+    <div class="position-relative mx-auto" style="max-width: 300px">
+      <input
+        type="text"
+        class="input input-bordered w-full"
+        placeholder="Buscar..."
+        [formControl]="searchControl"
+      />
+      @if (filteredItems().length > 0) {
+      <div
+        class="dropdown-menu show position-absolute w-100 bg-white border border-gray-300 mt-1"
+        style="z-index: 1; max-height: 200px; overflow-y: auto"
+      >
+        @for (item of filteredItems(); track item.name) {
+        <button
+          type="button"
+          class="dropdown-item text-left flex items-center px-2 py-1 hover:bg-gray-100"
+          (click)="addUserInput(item.name)"
+        >
+          {{ item.name }}
+        </button>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  } @else {
+  <div>
+    <h2 class="text-3xl font-bold text-red-500 mb-4">¡Juego Terminado!</h2>
+    <p>
+      Puntos: <span class="font-bold">{{ points() }}</span>
+    </p>
+    <p>
+      Secuencia Recordada:
+      <span class="font-bold">{{ sequenceRemembered() }}</span>
+    </p>
+    <p>
+      Tiempo: <span class="font-bold">{{ elapsedTime() }} segundos</span>
+    </p>
+    <button class="btn btn-accent mt-4" (click)="resetGame()">Reiniciar</button>
+  </div>
+  } }
+</div>
