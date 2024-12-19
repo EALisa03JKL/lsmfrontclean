@@ -70,4 +70,33 @@ export class LoginComponent {
       this.errorMessage = 'Por favor, completa todos los campos correctamente.';
     }
   }
+
+  async loginAsGuest() {
+    const guestCredentials = {
+      email: 'guest@guest.com',
+      password: 'abc123',
+    };
+
+    try {
+      await firstValueFrom(this.authService.login(guestCredentials));
+      // on login success
+      this.router.navigate(['/dashboard']);
+    } catch (error: any) {
+      if (error instanceof HttpErrorResponse) {
+        // Handle HTTP errors
+        if (error.status === 401) {
+          this.errorMessage =
+            'Credenciales incorrectas. Por favor, intenta de nuevo.';
+        } else {
+          this.errorMessage =
+            'Ocurrió un error en el servidor. Por favor, intenta más tarde.';
+        }
+      } else {
+        // Handle other types of errors
+        this.errorMessage =
+          'Ocurrió un error desconocido. Por favor, intenta más tarde.';
+      }
+      // console.error(error);
+    }
+  }
 }
