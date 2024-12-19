@@ -36,7 +36,7 @@ export class ProfileInfoComponent implements OnInit {
   ngOnInit() {
     const token = LocalManagerService.getElement(LocalKeys.token);
     if (token) {
-      console.log(this._decodeJwtService.decodeId(token));
+      // console.log(this._decodeJwtService.decodeId(token));
       this._AuthApiService
         .getUserData(token)
         .subscribe((data: UserResponse) => {
