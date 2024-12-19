@@ -1,0 +1,19 @@
+<div class="game-board">
+  @for (card of cards(); track card.id) {
+  <app-card [card]="card" (cardClick)="onCardClick(card)"></app-card>
+  }
+</div>
+@if (isGameEnded()) {
+<div class="modal modal-open">
+  <div class="modal-box">
+    <h2 class="font-bold text-lg">Congratulations!</h2>
+    <p class="py-4">
+      You completed the game in {{ moves() }} moves and
+      {{ elapsedTime() }} seconds.
+    </p>
+    <div class="modal-action">
+      <button class="btn" (click)="restartGame()">Play Again</button>
+    </div>
+  </div>
+</div>
+}

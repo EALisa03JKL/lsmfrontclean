@@ -1,16 +1,5 @@
-<div class="game-board">
-  <div *ngFor="let card of shuffledCards; let index = index; trackBy: trackByCardId">
-    <div
-      class="memory-card"
-      (click)="flipCard(index)"
-      [class.flipped]="isFlipped(card)"
-      [class.matched]="matchedCards.includes(card)"
-    >
-      <div class="card-front">
-        <img *ngIf="isFlipped(card)" [src]="card.imageURL" alt="{{ card.name }}" />
-      </div>
-      <div class="card-back" *ngIf="!isFlipped(card)">
-        {{ card.name }}
-      </div>
-    </div>
+<div class="game p-4 rounded-lg shadow-lg h-full">
+  <h2 class="text-2xl font-bold mb-4">Memory Game</h2>
+  <app-scoreboard class="mb-4"></app-scoreboard>
+  <app-game-board class="m-12"></app-game-board>
 </div>

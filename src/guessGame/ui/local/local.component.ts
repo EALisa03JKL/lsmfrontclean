@@ -4,6 +4,8 @@ import {
   OnInit,
   WritableSignal,
   signal,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
@@ -24,6 +26,8 @@ import { GuessUseCaseService } from '../../application/guess-use-case.service';
   styleUrl: './local.component.css',
 })
 export class LocalComponent implements OnInit {
+  @ViewChild('searchInput') searchInput!: ElementRef;
+
   _guessUseCase = inject(GuessUseCaseService);
   _decodeJwtService = inject(DecodeJwtService);
 
@@ -94,6 +98,7 @@ export class LocalComponent implements OnInit {
     this.filteredItems = [];
     this.guess(item.name);
     this.searchControl.setValue('');
+    this.searchInput.nativeElement.focus(); // Focus on the input after selecting an item
   }
 
   guess(signName: string) {

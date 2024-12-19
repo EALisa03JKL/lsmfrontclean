@@ -7,7 +7,15 @@
   </div>
   } @else { @if (!isGameOver()) {
   <div>
-    <!-- Información del Juego -->
+    <!-- Alerta de Mejor Partida -->
+    <div class="alert mb-4 flex flex-row items-center w-full justify-between">
+      <h3 class="text-xl font-bold">Mejor Partida</h3>
+      <p>Puntos: {{ userHighPoints()?.points }}</p>
+      <p>Numero Secuencia: {{ userHighPoints()?.sequenceRemembered }}</p>
+    </div>
+
+    <!-- Badges con palabras seleccionadas -->
+    <h3 class="text-lg font-semibold mb-2">Tu Secuencia Actual:</h3>
     <div class="mb-4 grid grid-cols-3 gap-4 text-center">
       <div>
         Puntos: <span class="font-bold">{{ points() }}</span>
@@ -20,9 +28,6 @@
         Tiempo: <span class="font-bold">{{ elapsedTime() }}s</span>
       </div>
     </div>
-
-    <!-- Badges con palabras seleccionadas -->
-    <h3 class="text-lg font-semibold mb-2">Tu Secuencia Actual:</h3>
     <div class="flex flex-wrap gap-2 justify-center mb-4">
       @for (word of _userSequence(); track word) {
       <div class="badge badge-accent gap-2 px-4 py-2">
@@ -30,11 +35,15 @@
       </div>
       }
     </div>
+
     <!-- Tarjetas de la Secuencia Esperada -->
     <h3 class="text-lg font-semibold mt-6 mb-2">Secuencia Completa:</h3>
     <div class="grid grid-cols-4 gap-4 justify-center mb-6">
       @for (card of _sequence(); track card.id) {
-      <div class="card bg-base-100 shadow-md border p-2" (click)="showModal(card.imageURL)">
+      <div
+        class="card bg-base-100 shadow-md border p-2"
+        (click)="showModal(card.imageURL)"
+      >
         <img
           [src]="card.imageURL"
           alt="{{ card.name }}"
@@ -45,32 +54,29 @@
       }
     </div>
 
-    <!-- Input de búsqueda -->
-    <div class="relative mx-auto" style="max-width: 300px">
+    <!-- Input de búsqueda con autocompletado -->
+    <div class="position-relative mx-auto" style="max-width: 300px">
       <input
+        #searchInput
         type="text"
         class="input input-bordered w-full"
         placeholder="Buscar..."
         [formControl]="searchControl"
       />
-
-      <!-- Lista de opciones filtradas -->
-      @if (filteredItems().length > 0) {
       <div
-        class="dropdown-menu show absolute w-full bg-base-100 border border-base-300 mt-1 rounded-lg shadow-lg"
-        style="z-index: 10; max-height: 200px; overflow-y: auto"
+        *ngIf="filteredItems.length > 0"
+        class="dropdown-menu show position-absolute w-100 bg-base-100 border border-base-300 mt-1"
+        style="z-index: 1; max-height: 200px; overflow-y: auto"
       >
-        @for (item of filteredItems(); track item.name) {
         <button
+          *ngFor="let item of filteredItems"
           type="button"
-          class="dropdown-item text-left px-3 py-2 hover:bg-base-200 w-full flex items-center"
+          class="dropdown-item text-left flex items-center px-2 py-1 hover:bg-base-200 w-full"
           (click)="addUserInput(item.name)"
         >
           {{ item.name }}
         </button>
-        }
       </div>
-      }
     </div>
   </div>
   } @else {
@@ -95,9 +101,19 @@
 <!-- Modal para mostrar la imagen completa -->
 <dialog id="imageModal" class="modal">
   <div class="modal-box">
-    <img *ngIf="modalImage()" [src]="modalImage()" alt="Imagen Completa" class="w-full h-auto" />
+    <img
+      *ngIf="modalImage()"
+      [src]="modalImage()"
+      alt="Imagen Completa"
+      class="w-full h-auto"
+    />
     <div class="modal-action">
-      <button class="btn" onclick="document.getElementById('imageModal').close()">Cerrar</button>
+      <button
+        class="btn"
+        onclick="document.getElementById('imageModal').close()"
+      >
+        Cerrar
+      </button>
     </div>
   </div>
 </dialog>

@@ -1,0 +1,14 @@
+<div
+  class="card"
+  [ngClass]="{ flipped: card.flipped, matched: card.matched }"
+  (click)="onCardClick()"
+>
+  <div class="card-inner">
+    <div class="card-front">
+      <img src="carta_volteada.jpg" alt="card-back" />
+    </div>
+    <div class="card-back">
+      <img [src]="card.imageURL" alt="card" />
+    </div>
+  </div>
+</div>
