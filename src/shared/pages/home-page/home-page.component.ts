@@ -15,6 +15,9 @@ import {
   standalone: true,
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
+  template: `
+    <button (click)="navigate()">Saber más</button>
+  `,
   styleUrls: ['./home-page.component.css'],
   imports: [LucideAngularModule],
 })
@@ -35,5 +38,9 @@ export class HomePageComponent {
 
   register() {
     this.router.navigate(['/register']);
+  }
+
+  navigate(): void {
+    window.open('https://www.gob.mx/conadis/articulos/lengua-de-senas-mexicana-lsm?idiom=es', '_blank');
   }
 }

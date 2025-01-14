@@ -34,6 +34,10 @@ interface errorResponse {
   imports: [ReactiveFormsModule],
 })
 export class RegisterComponent {
+    // Método para redirigir a la página de registro
+    goToLogin() {
+      this.router.navigate(['/login']);
+    }
   authService = inject(AuthUserUseCaseService);
   router = inject(Router);
 

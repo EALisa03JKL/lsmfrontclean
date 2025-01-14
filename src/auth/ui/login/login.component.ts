@@ -10,6 +10,7 @@ import { AuthUserUseCaseService } from '../../application/user/auth-user-use-cas
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 
+
 interface LoginForm {
   email: FormControl<string>;
   password: FormControl<string>;
@@ -23,6 +24,12 @@ interface LoginForm {
   imports: [ReactiveFormsModule],
 })
 export class LoginComponent {
+  
+  // Método para redirigir a la página de registro
+  goToRegister() {
+    this.router.navigate(['/register']);
+  }
+
   authService = inject(AuthUserUseCaseService);
   router = inject(Router);
 
